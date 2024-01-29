@@ -3,34 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ransomware Attack</title>
+    <title>Continuous Popup Messages</title>
     <style>
         body {
-            background-color: #000;
-            color: #ff0000;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .popup-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             text-align: center;
-            margin: 10% 0;
         }
-        h1 {
-            font-size: 3em;
-        }
-        p {
-            font-size: 1.5em;
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
         }
     </style>
-    <script>
-        function showPopup() {
-            alert("Your files are being decrypted. Click OK to download the decryption key.");
-            window.location.href = "[FakeDecryptionKeyDownloadLink]";
-        }
-    </script>
 </head>
-<body onload="showPopup()">
-    <h1>Ransomware Attack!</h1>
-    <p>Your files have been encrypted. Pay the ransom to get the decryption key.</p>
-    <p>Bitcoin Address: [YourFakeBitcoinAddress]</p>
-    <p>Amount: [FakeAmount] BTC</p>
-    <p>Time Left: [FakeCountdown]</p>
+<body>
+
+<div class="popup-container">
+    <div class="popup" id="popup1">
+        <span class="popup-close" onclick="closePopup('popup1')">×</span>
+        <h2>Welcome to Continuous Popup Messages!</h2>
+        <p>This is the first sample popup message.</p>
+    </div>
+    <div class="popup" id="popup2">
+        <span class="popup-close" onclick="closePopup('popup2')">×</span>
+        <h2>Second Popup</h2>
+        <p>This is the second sample popup message.</p>
+    </div>
+    <div class="popup" id="popup3">
+        <span class="popup-close" onclick="closePopup('popup3')">×</span>
+        <h2>Third Popup</h2>
+        <p>This is the third sample popup message.</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        cyclePopups();
+    });
+
+    function cyclePopups() {
+        var popups = document.querySelectorAll('.popup');
+
+        // Show the first popup
+        showPopup(popups[0]);
+
+        // Cycle through popups at regular intervals (adjust the time as needed)
+        setInterval(function () {
+            for (var i = 0; i < popups.length; i++) {
+                hidePopup(popups[i]);
+            }
+            var nextIndex = (currentPopupIndex + 1) % popups.length;
+            showPopup(popups[nextIndex]);
+        }, 5000); // Adjust the time (in milliseconds) between popups
+    }
+
+    var currentPopupIndex = 0;
+
+    function showPopup(popup) {
+        popup.style.display = 'block';
+    }
+
+    function hidePopup(popup) {
+        popup.style.display = 'none';
+    }
+
+    // Function to open a new site when the user closes the current site
+    window.onbeforeunload = function () {
+        // Open a new site in a new tab or window
+        window.open('https://www.example.com', '_blank');
+    };
+</script>
+
 </body>
 </html>

